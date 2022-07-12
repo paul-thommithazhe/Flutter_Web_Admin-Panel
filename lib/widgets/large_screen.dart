@@ -1,3 +1,5 @@
+import 'package:admin_panel_take_it/helpers/local_navigator.dart';
+import 'package:admin_panel_take_it/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 
 class LargeScreen extends StatelessWidget {
@@ -7,13 +9,13 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: Container(color: Colors.blue),
+        const Expanded(
+          child: SideMenu(),
         ),
         Expanded(
           flex: 5,
-          child: Container(color: Colors.red),
-        )
+          child: localNavigator(),
+        ),
       ],
     );
   }

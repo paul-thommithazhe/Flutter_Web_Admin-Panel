@@ -3,18 +3,12 @@ import 'package:admin_panel_take_it/constants/style.dart';
 import 'package:admin_panel_take_it/helpers/responsiveness.dart';
 import 'package:admin_panel_take_it/routing/routes.dart';
 import 'package:admin_panel_take_it/widgets/custom_text.dart';
+import 'package:admin_panel_take_it/widgets/side_menu_item.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
-class SideMenuItem extends StatelessWidget {
-  const SideMenuItem({
-    Key? key,
-    required this.itemName,
-    required this.onTap,
-  }) : super(key: key);
-  final String itemName;
-  final VoidCallback onTap;
+class SideMenu extends StatelessWidget {
+  const SideMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +22,7 @@ class SideMenuItem extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Row(
@@ -49,7 +43,7 @@ class SideMenuItem extends StatelessWidget {
                     SizedBox(width: _width / 48),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
               ],
@@ -60,22 +54,29 @@ class SideMenuItem extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: sideMenuItems
-                .map((item) => SideMenuItem(
-                    itemName: item.name,
-                    onTap: () {
-                      // if (item.route == authenticationPageRoute) {
-                      //   Get.offAllNamed(authenticationPageRoute);
-                      //   menuController
-                      //       .changeActiveItemTo(overviewPageDisplayName);
-                      // }
-                      // if (!menuController.isActive(item.name)) {
-                      //   menuController.changeActiveItemTo(item.name);
-                      //   if (ResponsiveWidget.isSmallScreen(context)) Get.back();
-                      //   navigationController.navigateTo(item.route);
-                      // }
-                    }))
+                .map(
+                  (item) => SideMenuItem(
+                      itemName: item,
+                      onTap: () {
+                        if (item == authenticationPageRoute) {
+                          // Get.offAllNamed(authenticationPageRoute);
+                          // menuController
+                          //     .changeActiveItemTo(overviewPageDisplayName);
+                        }
+                        if (!menuController.isActive(item)) {
+                          menuController.changeActiveItemTo(item);
+                          print('go to $item page');
+                          // if (ResponsiveWidget.isLargeScreen(context)) {
+                          //   Get.back();
+                          //   navigationController.navigateTo(item);
+                          // }
+                          Get.back();
+                          navigationController.navigateTo(item);
+                        }
+                      }),
+                )
                 .toList(),
-          )
+          ),
         ],
       ),
     );

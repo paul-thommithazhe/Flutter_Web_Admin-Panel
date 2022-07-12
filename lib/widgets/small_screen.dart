@@ -1,16 +1,11 @@
+import 'package:admin_panel_take_it/helpers/local_navigator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 
 class SmallScreen extends StatelessWidget {
   const SmallScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints.expand(),
-      color: Colors.green,
-    );
+    return localNavigator();
   }
 }

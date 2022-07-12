@@ -10,7 +10,7 @@ class MenuController extends GetxController {
 
   var hoverItem = "".obs;
 
-  ChangeActiveItemTo(String itemName) {
+  changeActiveItemTo(String itemName) {
     activeItem.value = itemName;
   }
 
@@ -35,16 +35,16 @@ class MenuController extends GetxController {
       default:
         return _customIcon(Icons.exit_to_app, itemName);
     }
-    ;
   }
 
   Widget _customIcon(IconData icon, String itemName) {
-    if (isActive(itemName))
-      return Icon(
+    if (isActive(itemName)) {
+      Icon(
         icon,
         size: 22,
         color: dark,
       );
+    }
     return Icon(icon, color: isHovering(itemName) ? dark : lightGrey);
   }
 }

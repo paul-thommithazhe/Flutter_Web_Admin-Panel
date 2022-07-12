@@ -2,17 +2,17 @@ import 'package:admin_panel_take_it/constants/controllers.dart';
 import 'package:admin_panel_take_it/constants/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'custom_text.dart';
 
 class VertticalMenuItem extends StatelessWidget {
+  final String itemName;
+  final VoidCallback onTap;
   const VertticalMenuItem({
     Key? key,
     required this.itemName,
     required this.onTap,
   }) : super(key: key);
-  final String itemName;
-  final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -60,13 +60,12 @@ class VertticalMenuItem extends StatelessWidget {
                         ))
                       else
                         Flexible(
-                          child: CustomText(
-                            text: itemName,
-                            color: Colors.white,
-                            size: 18,
-                            weight: FontWeight.bold,
-                          ),
-                        )
+                            child: CustomText(
+                          text: itemName,
+                          color: Colors.white,
+                          size: 18,
+                          weight: FontWeight.bold,
+                        ))
                     ],
                   ),
                 ),
