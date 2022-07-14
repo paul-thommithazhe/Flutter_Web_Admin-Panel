@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "451348502324",
+    "project_id": "take-it-and-go-fdbc4",
+    "storage_bucket": "take-it-and-go-fdbc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451348502324:android:9e748c288c5c5c18933761",
+        "android_client_info": {
+          "package_name": "com.example.take_it_and_go"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "451348502324-gdp8ttl1re0euh2s1o0nausli1cf25c9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZMD8C2ykkLACJVZ-V0ImTbG5alGIIAII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "451348502324-gdp8ttl1re0euh2s1o0nausli1cf25c9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451348502324:android:f7b3cc9a501d0d71933761",
+        "android_client_info": {
+          "package_name": "com.example.take_it_and_go_admin_side"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "451348502324-gdp8ttl1re0euh2s1o0nausli1cf25c9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZMD8C2ykkLACJVZ-V0ImTbG5alGIIAII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "451348502324-gdp8ttl1re0euh2s1o0nausli1cf25c9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

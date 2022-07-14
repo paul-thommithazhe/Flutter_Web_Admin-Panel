@@ -1,6 +1,7 @@
 import 'package:admin_panel_take_it/constants/style.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 
 class ProductsPage extends StatelessWidget {
   ProductsPage({Key? key}) : super(key: key);
@@ -22,6 +23,8 @@ class ProductsPage extends StatelessWidget {
   final formProductKey = GlobalKey<FormState>();
 
   int initialOfferValue = 0;
+
+  Image? fromPicker;
 
   // dialog box for adding the product date detials
   openDialog(context) => showDialog(
@@ -131,8 +134,10 @@ class ProductsPage extends StatelessWidget {
                   ),
                   kHeight20,
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       print('image image');
+
+                      fromPicker = await ImagePickerWeb.getImageAsWidget();
                     },
                     child: Container(
                         padding: EdgeInsets.all(8),
@@ -149,11 +154,11 @@ class ProductsPage extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           final form = formProductKey.currentState;
+                          print(fromPicker);
                           if (form!.validate()) {
                             print('form is valid');
-                          } else {
-                            print('not valid');
                           }
+                          return null;
                         },
                         child: const Text(
                           'Submit',
@@ -173,77 +178,80 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-           
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0, top: 20.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  //dialog box for adding the data
-                  openDialog(context);
-                },
-                child: const Text(
-                  'Add Product',
-                  style: TextStyle(fontSize: 18),
+    return Padding(
+      padding: const EdgeInsets.all(30.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 20.0, top: 20.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    //dialog box for adding the data
+                    openDialog(context);
+                  },
+                  child: const Text(
+                    'Add Product',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
-              ),
-            )
-          ],
-        ),
-        Expanded(
-          flex: 5,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: DataTable2(
-              columnSpacing: 5,
-              horizontalMargin: 0,
-              minWidth: 100,
-              columns: const [
-                DataColumn2(
-                  label: Text('Index'),
-                  size: ColumnSize.L,
-                ),
-                DataColumn(
-                  label: Text('Image'),
-                ),
-                DataColumn(
-                  label: Text('Name'),
-                ),
-                DataColumn(
-                  label: Text('Price'),
-                ),
-                DataColumn(
-                  label: Text('Stock'),
-                ),
-                DataColumn(
-                  label: Text('Status'),
-                  numeric: true,
-                ),
-              ],
-              rows: List<DataRow>.generate(
-                10,
-                (index) => DataRow(
-                  cells: [
-                    DataCell(Text(index.toString())),
-                    DataCell(Checkbox(
-                      value: false,
-                      onChanged: (bool? value) {},
-                    )),
-                    DataCell(Text('A')),
-                    DataCell(Text('B')),
-                    DataCell(Text('C')),
-                    DataCell(Text('D')),
-                  ],
+              )
+            ],
+          ),
+          Expanded(
+            flex: 5,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: DataTable2(
+                columnSpacing: 5,
+                horizontalMargin: 0,
+                minWidth: 100,
+                columns: const [
+                  DataColumn2(
+                    label: Text('Index'),
+                    size: ColumnSize.L,
+                  ),
+                  DataColumn(
+                    label: Text('Image'),
+                  ),
+                  DataColumn(
+                    label: Text('Name'),
+                  ),
+                  DataColumn(
+                    label: Text('Price'),
+                  ),
+                  DataColumn(
+                    label: Text('Stock'),
+                  ),
+                  DataColumn(
+                    label: Text('Status'),
+                    numeric: true,
+                  ),
+                ],
+                rows: List<DataRow>.generate(
+                  10,
+                  (index) => DataRow(
+                    cells: [
+                      DataCell(Text(index.toString())),
+                      DataCell(Container(
+                        width: 20,
+                        height: 20,
+                        color: Colors.green,
+                      )),
+                      DataCell(Text('A')),
+                      DataCell(Text('B')),
+                      DataCell(Text('C')),
+                      DataCell(Text('D')),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
