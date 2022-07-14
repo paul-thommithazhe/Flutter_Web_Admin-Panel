@@ -12,13 +12,14 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
 
     return Container(
       color: light,
       child: ListView(
         children: [
           if (ResponsiveWidget.isSmallScreen(context))
+            
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -27,20 +28,20 @@ class SideMenu extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SizedBox(width: _width / 48),
+                    SizedBox(width: width / 48),
                     Padding(
                       padding: const EdgeInsets.only(right: 12),
                       child: Image.asset("assets/icons/logo.png"),
                     ),
                     const Flexible(
                       child: CustomText(
-                        text: "Dash",
+                        text: "DashBoard",
                         size: 20,
                         weight: FontWeight.bold,
                         color: active,
                       ),
                     ),
-                    SizedBox(width: _width / 48),
+                    SizedBox(width: width / 48),
                   ],
                 ),
                 const SizedBox(
@@ -48,9 +49,9 @@ class SideMenu extends StatelessWidget {
                 ),
               ],
             ),
-          Divider(
-            color: lightGrey.withOpacity(.1),
-          ),
+          // Divider(
+          //   color: lightGrey.withOpacity(.1),
+          // ),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: sideMenuItems
@@ -58,14 +59,14 @@ class SideMenu extends StatelessWidget {
                   (item) => SideMenuItem(
                       itemName: item,
                       onTap: () {
-                        if (item == authenticationPageRoute) {
+                        if (item == homePageRoute) {
                           // Get.offAllNamed(authenticationPageRoute);
                           // menuController
                           //     .changeActiveItemTo(overviewPageDisplayName);
                         }
                         if (!menuController.isActive(item)) {
                           menuController.changeActiveItemTo(item);
-                          print('go to $item page');
+
                           // if (ResponsiveWidget.isLargeScreen(context)) {
                           //   Get.back();
                           //   navigationController.navigateTo(item);

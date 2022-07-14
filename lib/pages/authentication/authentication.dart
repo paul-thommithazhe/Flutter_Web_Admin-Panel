@@ -9,7 +9,7 @@ class AuthenicationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: CustomText(
-        text: 'Authentication',
+        text: 'Log out',
       ),
     );
   }

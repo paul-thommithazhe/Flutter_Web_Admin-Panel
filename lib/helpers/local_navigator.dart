@@ -5,6 +5,6 @@ import 'package:flutter/cupertino.dart';
 
 Navigator localNavigator() => Navigator(
       key: navigationController.navigationKey,
-      initialRoute: overViewPageRoute,
+      initialRoute: homePageRoute,
       onGenerateRoute: generateRoute,
     );

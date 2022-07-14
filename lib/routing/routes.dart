@@ -1,14 +1,20 @@
-const overViewPageRoute = "Overview";
+const homePageRoute = "Home";
 
-const driversPageRoute = "Drivers";
+const usersPageRoute = "Users";
 
-const clientsPageRoute = "Clients";
+const productsPageRoute = "Products";
 
-const authenticationPageRoute = "Authentication";
+const offerPageRoute = "Offer";
+
+const couponPageRoute = "Coupons";
+
+const salesPageReport = "Sales Report";
 
 List sideMenuItems = [
-  overViewPageRoute,
-  driversPageRoute,
-  clientsPageRoute,
-  authenticationPageRoute,
+  homePageRoute,
+  usersPageRoute,
+  productsPageRoute,
+  offerPageRoute,
+  couponPageRoute,
+  salesPageReport,
 ];
