@@ -4,17 +4,21 @@ const usersPageRoute = "Users";
 
 const productsPageRoute = "Products";
 
-const offerPageRoute = "Offer";
-
 const couponPageRoute = "Coupons";
 
+const categoryPageRoute = "Category";
+
 const salesPageReport = "Sales Report";
+
+
+const order = 'order management';
 
 List sideMenuItems = [
   homePageRoute,
   usersPageRoute,
   productsPageRoute,
-  offerPageRoute,
   couponPageRoute,
+  categoryPageRoute,
+  order,
   salesPageReport,
 ];

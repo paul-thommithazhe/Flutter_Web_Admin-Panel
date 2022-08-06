@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
-      options: FirebaseOptions(
+      options: const FirebaseOptions(
           apiKey: "AIzaSyC66sCLAVET8WoMqzK7xiI23O_k6Qn_BHg",
           authDomain: "take-it-and-go-fdbc4.firebaseapp.com",
           projectId: "take-it-and-go-fdbc4",

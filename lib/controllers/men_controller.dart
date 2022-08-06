@@ -30,9 +30,10 @@ class MenuController extends GetxController {
         return _customIcon(Icons.people, itemName);
       case productsPageRoute:
         return _customIcon(Icons.shopping_bag, itemName);
-      case offerPageRoute:
-        return _customIcon(Icons.money_off_csred_outlined, itemName);
+
       case couponPageRoute:
+        return _customIcon(Icons.shopping_bag_outlined, itemName);
+      case categoryPageRoute:
         return _customIcon(Icons.shopping_bag_outlined, itemName);
       case salesPageReport:
         return _customIcon(Icons.file_copy, itemName);

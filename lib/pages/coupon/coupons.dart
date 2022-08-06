@@ -1,15 +1,13 @@
+import 'dart:developer';
+
 import 'package:admin_panel_take_it/constants/style.dart';
-import 'package:admin_panel_take_it/widgets/custom_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/widgets.dart';
-
 final TextEditingController couponNameController = TextEditingController();
 
-final TextEditingController couponOfferController= TextEditingController();
-
-
+final TextEditingController couponOfferController = TextEditingController();
 
 final formCouponKey = GlobalKey<FormState>();
 
@@ -18,7 +16,7 @@ class CouponPage extends StatelessWidget {
 
   openCouponDialog(context) => showDialog(
         context: context,
-        builder: (_) => AlertDialog(
+        builder: (BuildContext context) => AlertDialog(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
           // contentPadding: EdgeInsets.all(10),
@@ -51,11 +49,10 @@ class CouponPage extends StatelessWidget {
                       return null;
                     },
                     controller: couponOfferController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(), hintText: 'Offer'),
                   ),
                   kHeight20,
-                 
                   kHeight20,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -64,17 +61,26 @@ class CouponPage extends StatelessWidget {
                         onPressed: () {
                           final form = formCouponKey.currentState;
                           if (form!.validate()) {
-                            print('form is valid');
+                            log('form is valid');
+                            Map<String, dynamic> data = {
+                              'coupon': couponNameController.text,
+                              'offer': couponOfferController.text,
+                            };
+                            FirebaseFirestore.instance
+                                .collection('coupon')
+                                .doc()
+                                .set(data);
+                                Navigator.pop(context);
                           } else {
-                            print('not valid');
+                            log('not valid');
                           }
                         },
+                        style:
+                            ElevatedButton.styleFrom(fixedSize: Size(150, 40)),
                         child: const Text(
                           'Submit',
                           style: TextStyle(fontSize: 18),
                         ),
-                        style:
-                            ElevatedButton.styleFrom(fixedSize: Size(150, 40)),
                       )
                     ],
                   )
@@ -87,52 +93,72 @@ class CouponPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(30.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  openCouponDialog(context);
-                },
-                child: Text('Add Coupon'),
-              )
-            ],
-          ),
-          Expanded(
-            child: DataTable2(
-              columnSpacing: 5,
-              horizontalMargin: 0,
-              minWidth: 100,
-              columns: const [
-                DataColumn2(
-                  label: Text('Index'),
-                  size: ColumnSize.L,
-                ),
-                DataColumn(
-                  label: Text('Coupon'),
-                ),
-                DataColumn(
-                  label: Text('Offer'),
-                ),
-              ],
-              rows: List<DataRow>.generate(
-                10,
-                (index) => DataRow(
-                  cells: [
-                    DataCell(Text(index.toString())),
-                    DataCell(Text('takeitgo4545')),
-                    DataCell(Text('dfdfdf')),
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('coupon').snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        
+                        onPressed: () {
+                          openCouponDialog(context);
+                        },
+                        child: const Text('Add Coupon'),
+                      ),
+                    )
                   ],
                 ),
-              ),
+                kHeight20,
+                Expanded(
+                  child: Card(
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: DataTable2(
+                        columnSpacing: 5,
+                        horizontalMargin: 0,
+                        minWidth: 20,
+                        columns: const [
+                          DataColumn2(
+                            label: Text('Index'),
+                            size: ColumnSize.L,
+                          ),
+                          DataColumn(
+                            label: Text('Coupon'),
+                          ),
+                          DataColumn(
+                            label: Text('Offer'),
+                          ),
+                        ],
+                        rows: List<DataRow>.generate(
+                          snapshot.data!.docs.length,
+                          (index) => DataRow(
+                            cells: [
+                              DataCell(Text(index.toString())),
+                              DataCell(Text(snapshot.data!.docs[index]['coupon']
+                                  .toString())),
+                              DataCell(Text(snapshot.data!.docs[index]['offer']
+                                  .toString())),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-    );
+          );
+        });
   }
 }
